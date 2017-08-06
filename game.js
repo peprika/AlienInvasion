@@ -11,10 +11,10 @@ if(!ctx) {
 	}
 	
 	function startGame() {
-		
-		var img = new Image();
-		img.onload = function() {
-			ctx.drawImage(img,0,0,37,42,100,100,50,50);
-		}
-		img.src = 'images/sprites.png';
+		SpriteSheet.load({
+			ship: { sx; 0, sy: 0, w: 18, h: 35, frames: 3 }
+		},function() {
+			SpriteSheet.draw(ctx, "ship", 0,0);
+			SpriteSheet.draw(ctx, "ship", 100,50);
+			SpriteSheet.draw(ctx, "ship", 150,100,1);
 	}
