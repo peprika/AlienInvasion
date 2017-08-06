@@ -11,5 +11,10 @@ if(!ctx) {
 	}
 	
 	function startGame() {
-		// Let's get to work
+		
+		var img = new Image();
+		img.onload = function() {
+			ctx.drawImage(img,0,0,37,42,100,100,50,50);
+		}
+		img.src = 'images/sprites.png';
 	}
