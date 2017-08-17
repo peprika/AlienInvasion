@@ -1,8 +1,8 @@
 
 var Game = new function() {
 
-// Game initialization
-this.initalize = function(canvasElementId, sprite_data, callback) {
+	// Game initialization
+	this.initialize = function(canvasElementId,sprite_data,callback) {
 
 		this.canvas = document.getElementById(canvasElementId);
 		this.width = this.canvas.width;
@@ -76,6 +76,6 @@ var SpriteSheet = new function() {
 					s.sy,
 					s.w, s.h,
 					x,	 y,
-					s.w, s.hw);
+					s.w, s.h);
 	};
  }
