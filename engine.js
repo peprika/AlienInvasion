@@ -28,14 +28,14 @@ var KEY_CODES = { 37:'left', 39:'right', 32:'fire' };
 this.keys = {};
 this.setupInput = function () {
 	window.addEventListener('keydown', function(e) {
-		if(KEY_CODES[event.keyCode]) {
-			Game.keys[KEY_CODES[event.keyCode]] = true;
+		if(KEY_CODES[e.keyCode]) {
+			Game.keys[KEY_CODES[e.keyCode]] = true;
 			e.preventDefault();
 		}
 	},false);
 	window.addEventListener('keyup', function(e) {
-		if(KEY_CODES[event.keyCode]) {
-			Game.keys[KEY_CODES[event.keyCode]] = false;
+		if(KEY_CODES[e.keyCode]) {
+			Game.keys[KEY_CODES[e.keyCode]] = false;
 			e.preventDefault();
 		}
 	},false);
@@ -59,7 +59,7 @@ this.loop = function() {
 };
 
 // The SpriteSheet class
-var SpriteSheet = new function();
+var SpriteSheet = new function() {
  this.map = { };
  this.load = function(spriteData,callback) {
 	 this.map = spriteData;
