@@ -41,8 +41,25 @@ this.setupInput = function () {
 	},false);
 }
 
+// Game loop
+var boards = [];
+this.loop = function() {
+	var dt = 30/1000;
+	for(var i = 0, len = boards.length; i < len; i++) {
+		if(boards[i]) {
+			boards[i].step(dt);
+			boards[i] && boards[i].draw(Game.ctx);
+		}
+	}
+	setTimeout(Game.loop, 30);
+	};
+	// Change an active game board
+	this.setBoard = function(num, board) { boards[num] = board; };
+	
+};
 
-var SpreadSheet = new function();
+// The SpriteSheet class
+var SpriteSheet = new function();
  this.map = { };
  this.load = function(spriteData,callback) {
 	 this.map = spriteData;
