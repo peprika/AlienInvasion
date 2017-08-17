@@ -3,16 +3,19 @@ var sprites = {
 };
 
 var startGame = function() {
-    SpriteSheet.draw(Game.ctx,"ship",100,100,0);
 	Game.setBoard(0, new Starfield(20, 0.4, 100, true))
 	Game.setBoard(1, new Starfield(50, 0.6, 100))
 	Game.setBoard(2, new Starfield(100, 1.0, 50));
+	Game.setBoard(3, new TitleScreen("Alien Invasion", "Press space to start playing", playGame));
 }
 
 window.addEventListener("load", function() {
   Game.initialize("game",sprites,startGame);
-
 });
+
+var playGame = function() {
+	Game.setBoard(3, new TitleScreen("Alien Invasion", "Game started..."));
+}
 
 // Starfield
  var Starfield = function(speed,opacity,numStars,clear) {
