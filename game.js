@@ -14,7 +14,7 @@ window.addEventListener("load", function() {
 });
 
 var playGame = function() {
-	Game.setBoard(3, new TitleScreen("Alien Invasion", "Game started..."));
+	Game.setBoard(3, new PlayerShip());
 }
 
 // Starfield
@@ -63,8 +63,8 @@ var playGame = function() {
  
  // Player Ship
  var PlayerShip = function() {
-	 this.w = SpireSheet.map['ship'].w;
-	 this.h = SpireSheet.map['ship'].h;
+	 this.w = SpriteSheet.map['ship'].w;
+	 this.h = SpriteSheet.map['ship'].h;
 	 this.x = Game.width/2 - this.w/2;
 	 this.y = Game.height/2 - 10 - this.h;
 	 this.vx = 0;
@@ -72,6 +72,6 @@ var playGame = function() {
 		 // TODO - added the next section
 	 }
 	 this.draw = function(ctx) {
-		 SpireSheet.draw(ctx,'ship',this.w,this.y,1);
+		 SpriteSheet.draw(ctx,'ship',this.w,this.y,1);
 	 }
  }
