@@ -17,4 +17,5 @@ if(!ctx) {
 			SpriteSheet.draw(ctx, "ship", 0,0);
 			SpriteSheet.draw(ctx, "ship", 100,50);
 			SpriteSheet.draw(ctx, "ship", 150,100,1);
+	});
 	}
