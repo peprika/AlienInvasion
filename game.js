@@ -60,3 +60,18 @@ var playGame = function() {
 		offset = offset % stars.height;
 	}
  }
+ 
+ // Player Ship
+ var PlayerShip = function() {
+	 this.w = SpireSheet.map['ship'].w;
+	 this.h = SpireSheet.map['ship'].h;
+	 this.x = Game.width/2 - this.w/2;
+	 this.y = Game.height/2 - 10 - this.h;
+	 this.vx = 0;
+	 this.step = function(dt) {
+		 // TODO - added the next section
+	 }
+	 this.draw = function(ctx) {
+		 SpireSheet.draw(ctx,'ship',this.w,this.y,1);
+	 }
+ }
