@@ -1,21 +1,13 @@
+var sprites = {
+ ship: { sx: 0, sy: 0, w: 37, h: 42, frames: 1 }
+};
 
-var canvas = document.getElementById('game');
+var startGame = function() {
+    SpriteSheet.draw(Game.ctx,"ship",100,100,0);
+}
 
-var ctx = canvas.getContext && canvas.getContext('2d');
+window.addEventListener("load", function() {
+  Game.initialize("game",sprites,startGame);
 
-if(!ctx) {
-	// No 2d context available, let the user know
-	alert('Please upgrade your browser');
-	} else {
-		startGame();
-	}
-	
-	function startGame() {
-		SpriteSheet.load({
-			ship: { sx; 0, sy: 0, w: 18, h: 35, frames: 3 }
-		},function() {
-			SpriteSheet.draw(ctx, "ship", 0,0);
-			SpriteSheet.draw(ctx, "ship", 100,50);
-			SpriteSheet.draw(ctx, "ship", 150,100,1);
-	});
-	}
+});
+
