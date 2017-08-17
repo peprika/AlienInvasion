@@ -1,5 +1,5 @@
 var sprites = {
- ship: { sx: 0, sy: 0, w: 37, h: 42, frames: 1 }
+ ship: { sx: 1, sy: 0, w: 37, h: 42, frames: 1 }
 };
 
 var startGame = function() {
@@ -66,12 +66,27 @@ var playGame = function() {
 	 this.w = SpriteSheet.map['ship'].w;
 	 this.h = SpriteSheet.map['ship'].h;
 	 this.x = Game.width/2 - this.w/2;
-	 this.y = Game.height/2 - 10 - this.h;
+	 this.y = Game.height - 10 - this.h;
 	 this.vx = 0;
-	 this.step = function(dt) {
-		 // TODO - added the next section
-	 }
+			 this.maxVel = 200;
+			 this.step = function(dt) {
+			 // Check if button is pressed and set the velocity
+			 if(Game.keys['left']) 		 { this.vx = -this.maxVel; }
+			 else if(Game.keys['right']) { this.vx = this.maxVel; }
+		     else { this.vx = 0; }
+		 
+		 // Update the ship's position
+		 this.x += this.vx * dt;
+		 
+		 // Check collisions to the walls
+		 if(this.x < 0) { this.x = 0; }
+		 else if(this.x > Game.width - this.w) {
+			 this.x = Game.width - this.w;
+		 
+		 }
+	 }	 
 	 this.draw = function(ctx) {
-		 SpriteSheet.draw(ctx,'ship',this.w,this.y,1);
+		 SpriteSheet.draw(ctx,'ship',this.x,this.y,0);
 	 }
  }
+ 
