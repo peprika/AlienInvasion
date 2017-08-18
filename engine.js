@@ -128,7 +128,7 @@ var GameBoard = function() {
 	
 	// Remove objects marked for removal from th elist
 	this.finalizeRemoved = function() {
-		for(var i = 0, len = this.removed.legnth; i < len; i ++) {
+		for(var i = 0, len = this.removed.length; i < len; i ++) {
 			// Check for removed objects
 			var idx = this.objects.indexOf(this.removed[i]);
 			if(idx != -1) {
@@ -138,4 +138,22 @@ var GameBoard = function() {
 			}
 		}
 	}
+	
+	// Iteration: Call the same method on all current objects
+	this.iterate = function(funcName) {
+		var args = Array.prototype.slice.call(argument,1);
+		for(var i = 0, len = this.object.length; i < len; i++) {
+			var obj = this.objects[i];
+			obj[funcName].apply(orbj,args)
+		}
+	};
+	
+	// Detect: Find the first object for which func is true
+	this.detect  = function(func) {
+		for(var i = 0, val = null, len = this.objects.length; i < len; i++) {
+			if(func.call(this.objects[i]))
+				return this.objects[i];
+		}
+		return false;
+	};
 }
