@@ -156,4 +156,15 @@ var GameBoard = function() {
 		}
 		return false;
 	};
+	
+	// Step and Draw functions
+	this.step = function(dt) {
+		this.resetRemoved();
+		this.iterate('step', dt);
+		this.finalizeRemoved();
+	};
+	this.draw = function(ctx) {
+		this.iterate('draw', ctc);
+	};
+	
 }
