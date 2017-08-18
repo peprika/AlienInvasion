@@ -1,5 +1,6 @@
 var sprites = {
  ship: { sx: 1, sy: 0, w: 37, h: 42, frames: 1 }
+ missile: { sx: 0, sy: 0, w: 2, h: 10, frames 1 }
 };
 
 var startGame = function() {
@@ -93,4 +94,22 @@ var playGame = function() {
 		 SpriteSheet.draw(ctx,'ship',this.x,this.y,0);
 	 }
  }
+ 
+ // Player missile
+ var PlayerMissile = function(x, y) {
+	 this.w = SpriteSheet.map['missile'].w;
+	 this.h = SpriteSheet.map['missile'].h;
+	 // Center the missile on x
+	 this.x = x - this.w/2;
+	 //Use the passed-in y as bottom of the missile
+	 this.y = y - this.h;
+	 this.vy = -700;
+ };
+ PlayerMissile.prototype.step = function(dt) {
+	 this.y += this.vy * dt;
+	 if(this.y < -this.h) { this.board.remove(this); }
+ };
+ PlayerMissile.prototype.draw = function(ctx) {
+	SpriteSheet.draw(ctx, 'missile', this.x, this.y);
+ };
  
