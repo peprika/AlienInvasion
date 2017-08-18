@@ -141,7 +141,7 @@ var GameBoard = function() {
 	
 	// Iteration: Call the same method on all current objects
 	this.iterate = function(funcName) {
-		var args = Array.prototype.slice.call(argument,1);
+		var args = Array.prototype.slice.call(arguments, 1);
 		for(var i = 0, len = this.objects.length; i < len; i++) {
 			var obj = this.objects[i];
 			obj[funcName].apply(obj,args)
@@ -164,7 +164,20 @@ var GameBoard = function() {
 		this.finalizeRemoved();
 	};
 	this.draw = function(ctx) {
-		this.iterate('draw', ctc);
+		this.iterate('draw', ctx);
 	};
 	
+		// Detect collisions
+	this.overlap = function(o1,o2) {
+		return !((o1.y + o1.h - 1 < o2.y) || (o1.y > o2.y + o2.h1 - 1) ||
+				 (o1.x + o1.w - 1 < o2.x) || (o1.x > o2.x + o2.w - 1));
+	};
+	this.collide = function(obj, type) {
+		return this.detect(function() {
+			if(obj != this) {
+				var col = (!type || this.type & type) && board.overlap(obj, this)
+				return col ? this : false;
+			}
+		});
+	};
 }

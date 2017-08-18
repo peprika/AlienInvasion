@@ -14,7 +14,9 @@ window.addEventListener("load", function() {
 });
 
 var playGame = function() {
-	Game.setBoard(3, new PlayerShip());
+	var board = new GameBoard();
+	board.add(new PlayerShip());
+	Game.setBoard(3, board);
 }
 
 // Starfield
