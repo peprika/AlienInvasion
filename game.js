@@ -112,20 +112,17 @@ PlayerShip.prototype = new Sprite();
  
  // Player missile
  var PlayerMissile = function(x, y) {
-	 this.w = SpriteSheet.map['missile'].w;
-	 this.h = SpriteSheet.map['missile'].h;
+	 this.setup('missile', { vy: -700 });
 	 // Center the missile on x
 	 this.x = x - this.w/2;
 	 //Use the passed-in y as bottom of the missile
 	 this.y = y - this.h;
-	 this.vy = -700;
  };
+ PlayerMissile.prototype = new Sprite();
+ 
  PlayerMissile.prototype.step = function(dt) {
 	 this.y += this.vy * dt;
 	 if(this.y < -this.h) { this.board.remove(this); }
- };
- PlayerMissile.prototype.draw = function(ctx) {
-	SpriteSheet.draw(ctx, 'missile', this.x, this.y);
  };
  
  // Enemy constructor
