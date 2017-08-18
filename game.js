@@ -1,3 +1,9 @@
+var OBJECT_PLAYER = 1,
+	OBJECT_PLAYER_PROJECTILE = 2,
+	OBJECT_ENEMY = 4,
+	OBJECT_ENEMY_PROJECTILE = 8,
+	OBJECT_POWERUP = 16;
+
 var sprites = {
  ship: { sx: 1, sy: 0, w: 37, h: 42, frames: 1 },
  missile: { sx: 0, sy: 30, w: 2, h: 10, frames: 1 },
@@ -109,6 +115,7 @@ var playGame = function() {
 	}	 
 }
 PlayerShip.prototype = new Sprite();
+PlayerShip.prototype.type = OBJECT_PLAYER;
  
  // Player missile
  var PlayerMissile = function(x, y) {
@@ -119,6 +126,7 @@ PlayerShip.prototype = new Sprite();
 	 this.y = y - this.h;
  };
  PlayerMissile.prototype = new Sprite();
+ PlayerMissile.prototype.type = OBJECT_PLAYER_PROJECTILE;
  
  PlayerMissile.prototype.step = function(dt) {
 	 this.y += this.vy * dt;
@@ -132,6 +140,7 @@ var Enemy = function(blueprint, override) {
 	this.merge(override);
 }
 Enemy.prototype = new Sprite();
+Enemy.prototype.type = OBJECT_ENEMY;
 Enemy.prototype.baseParameters = { A: 0, B: 0, C: 0, D: 0,
 						      E: 0, F: 0, G: 0, H: 0, t: 0 };
 Enemy.prototype.step = function(dt) {
