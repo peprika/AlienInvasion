@@ -115,4 +115,27 @@ var GameBoard = function() {
 		this.cnt[obj.type] = (this.cnt[obj.type] || 0) + 1;
 		return obj;
 	};
+	
+	// Mark an object for removal
+	this.remove = function(obj) {
+		var wasStillAlive = this.removed.indexOf(obj) != -1;
+		if(wasStillAlive) { this.removed.push(obj); }
+		return wasStillAlive;
+	};
+	
+	// Reset the list of removed objects
+	this.resetRemoved = function() {this.removed = []; }
+	
+	// Remove objects marked for removal from th elist
+	this.finalizeRemoved = function() {
+		for(var i = 0, len = this.removed.legnth; i < len; i ++) {
+			// Check for removed objects
+			var idx = this.objects.indexOf(this.removed[i]);
+			if(idx != -1) {
+				this.cnt[this.removed[i].type]--;
+				// Cut the removed objects off the list
+				this.objects.splice(idx,1);
+			}
+		}
+	}
 }
