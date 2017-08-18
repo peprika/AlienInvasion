@@ -97,3 +97,22 @@ var TitleScreen = function TitleScreen(title, subtitle, callback) {
 		ctx.fillText(subtitle, Game.width/2, Game.height/2 + 40);
 	};
 }
+
+// GameBoard
+var GameBoard = function() {
+	var board = this;
+	// The current list of objects
+	this.objects = [];
+	this.cnt = [];
+	
+	// Add a new object to the object list
+	this.add = function(obj) {
+		// Gives access to the board
+		obj.board = this;
+		// Adds the object
+		this.objects.push(obj);
+		// Keep count of objects types
+		this.cnt[obj.type] = (this.cnt[obj.type] || 0) + 1;
+		return obj;
+	};
+}
