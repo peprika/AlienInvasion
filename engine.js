@@ -169,7 +169,7 @@ var GameBoard = function() {
 	
 		// Detect collisions
 	this.overlap = function(o1,o2) {
-		return !((o1.y + o1.h - 1 < o2.y) || (o1.y > o2.y + o2.h1 - 1) ||
+		return !((o1.y + o1.h - 1 < o2.y) || (o1.y > o2.y + o2.h - 1) ||
 				 (o1.x + o1.w - 1 < o2.x) || (o1.x > o2.x + o2.w - 1));
 	};
 	this.collide = function(obj, type) {
@@ -180,4 +180,24 @@ var GameBoard = function() {
 			}
 		});
 	};
+};
+
+// Setup for drawing a sprite
+var Sprite = function() { } // Empty because each sprite has it own constructor
+Sprite.prototype.setup = function(sprite, props) {
+	this.sprite = sprite;
+	this.merge(props);
+	this.frame = this.frame || 0;
+	this.w = SpriteSheet.map[sprite].w;
+	this.h = SpriteSheet.map[sprite].h;
+}
+Sprite.prototype.merge = function(props) {
+	if(props) {
+		for(var prop in props) {
+			this[prop] = props[prop];
+		}
+	}
+}
+Sprite.prototype.draw = function(ctx) {
+	SpriteSheet.draw(ctx, this.sprite, this.x, this.y, this.frame);
 }

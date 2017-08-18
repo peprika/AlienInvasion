@@ -8,7 +8,7 @@ var sprites = {
 };
 
 var enemies = {
-	basic: { x: 100, y: -50, sprite:'enemy_purple', B: 100, C: 2, E: 100 }
+	basic: { x: 100, y: -50, sprite: 'enemy_purple', B: 100, C: 2, E: 100 }
 };
 
 var startGame = function() {
@@ -47,7 +47,7 @@ var playGame = function() {
 		starCtx.fillRect(0, 0, stars.width, stars.height);
 	}
 	
-	// Now dra a bunch of random 2 pixel rectangles onto the offscreen canvas
+	// Now draw a bunch of random 2 pixel rectangles onto the offscreen canvas
 	starCtx.fillStyle = "#FFF";
 	starCtx.globalAlpha = opacity;
 	for(var i = 0; i < numStars; i ++) {
@@ -78,18 +78,14 @@ var playGame = function() {
  
  // Player Ship
  var PlayerShip = function() {
-	 this.w = SpriteSheet.map['ship'].w;
-	 this.h = SpriteSheet.map['ship'].h;
+	 this.setup('ship', { vx: 0, frames: 1, reloadTime: 0.25, maxVel: 200 });
 	 this.x = Game.width/2 - this.w/2;
 	 this.y = Game.height - 10 - this.h;
-	 this.vx = 0;
-	 this.reloadTime = 0.25;
 	 this.reload = this.reloadTime;
 	 this.step = function(dt) {
-		this.maxVel = 200;
 		// Check if button is pressed and set the velocity
-		if(Game.keys['left']) 		 { this.vx = -this.maxVel; }
-		else if(Game.keys['right']) { this.vx = this.maxVel; }
+		if(Game.keys['left']) 		{ this.vx = -this.maxVel; }
+		else if(Game.keys['right']) { this.vx = this.maxVel;  }
 		else { this.vx = 0; }
 		 
 		// Update the ship's position
@@ -109,13 +105,10 @@ var playGame = function() {
 			this.reload = this.reloadTime;
 			this.board.add(new PlayerMissile(this.x, this.y + this.h/2));
 			this.board.add(new PlayerMissile(this.x + this.w, this.y + this.h/2));
-		}
-		 
-	 }	 
-	 this.draw = function(ctx) {
-		 SpriteSheet.draw(ctx,'ship',this.x,this.y,0);
-	 }
- }
+		} 
+	}	 
+}
+PlayerShip.prototype = new Sprite();
  
  // Player missile
  var PlayerMissile = function(x, y) {
