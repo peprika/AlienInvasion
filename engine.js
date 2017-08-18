@@ -142,9 +142,9 @@ var GameBoard = function() {
 	// Iteration: Call the same method on all current objects
 	this.iterate = function(funcName) {
 		var args = Array.prototype.slice.call(argument,1);
-		for(var i = 0, len = this.object.length; i < len; i++) {
+		for(var i = 0, len = this.objects.length; i < len; i++) {
 			var obj = this.objects[i];
-			obj[funcName].apply(orbj,args)
+			obj[funcName].apply(obj,args)
 		}
 	};
 	
