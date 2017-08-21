@@ -52,10 +52,21 @@ window.addEventListener("load", function() {
 
 var playGame = function() {
 	var board = new GameBoard();
-	board.add(new Enemy(enemies.wiggle));
-	board.add(new Enemy(enemies.wiggle, { x: 200 }));
 	board.add(new PlayerShip());
+	board.add(new Level(level1, winGame));
 	Game.setBoard(3, board);
+}
+
+var winGame = function() {
+	Game.setBoard(3, newTitleScreen("You win!",
+									"Press fire to play again",
+									 playGame));
+}
+
+var loseGame = function() {
+	Game.setBoard(3, newTitleScreen("You lose!",
+									"Press fire to play again",
+									 playGame));
 }
 
 // Starfield
