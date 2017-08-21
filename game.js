@@ -15,7 +15,11 @@ var sprites = {
 };
 
 var enemies = {
-	basic: { x: 100, y: -50, sprite: 'enemy_purple', B: 100, C: 2, E: 100, health: 20 }
+	straight: { x: 0, y: -50, sprite: 'enemy_ship', health: 10, E: 100 },
+	ltr: { x: 0, y: -100, sprite: 'enemy_purple', health: 10, B: 200, C: 1, E: 200 },
+	circle: { x: 400, y: -50, sprite: 'enemy_circle', health: 10, A: 0, B: -200, C: 1, E: 20, F: 200, G:1, H: Math.PI/2 },
+	wiggle: { x: 100, y: -50, sprite: 'enemy_bee', health: 20, B: 100, C: 4, E: 100 },
+	step: { x: 0, y: -50, sprite: 'enemy_circle', health: 10, B: 300, C: 1.5, E: 60 }
 };
 
 var startGame = function() {
@@ -31,8 +35,8 @@ window.addEventListener("load", function() {
 
 var playGame = function() {
 	var board = new GameBoard();
-	board.add(new Enemy(enemies.basic));
-	board.add(new Enemy(enemies.basic, { x: 200 }));
+	board.add(new Enemy(enemies.wiggle));
+	board.add(new Enemy(enemies.wiggle, { x: 200 }));
 	board.add(new PlayerShip());
 	Game.setBoard(3, board);
 }
