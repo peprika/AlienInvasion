@@ -1,9 +1,11 @@
+// Object types
 var OBJECT_PLAYER = 1,
 	OBJECT_PLAYER_PROJECTILE = 2,
 	OBJECT_ENEMY = 4,
 	OBJECT_ENEMY_PROJECTILE = 8,
 	OBJECT_POWERUP = 16;
 
+// Sprite declarations
 var sprites = {
  ship: { sx: 1, sy: 0, w: 37, h: 42, frames: 1 },
  missile: { sx: 0, sy: 30, w: 2, h: 10, frames: 1 },
@@ -14,6 +16,7 @@ var sprites = {
  explosion: { sx: 0, sy: 64, w: 64, h: 64, frames: 12 }
 };
 
+// Enemy definitions
 var enemies = {
 	straight: { x: 0, y: -50, sprite: 'enemy_ship', health: 10, E: 100 },
 	ltr: { x: 0, y: -100, sprite: 'enemy_purple', health: 10, B: 200, C: 1, E: 200 },
@@ -22,6 +25,7 @@ var enemies = {
 	step: { x: 0, y: -50, sprite: 'enemy_circle', health: 10, B: 300, C: 1.5, E: 60 }
 };
 
+// Level data
 var level1 = [
 	// Start	End		Gap		Type		Override
 	 [ 0,		4000,	500,	'step'					],
@@ -34,6 +38,7 @@ var level1 = [
 	 [ 22000,	25000,	400,	'wiggle',	{ x: 200 }	]
 ];
 
+// Start the game
 var startGame = function() {
 	Game.setBoard(0, new Starfield(20, 0.4, 100, true))
 	Game.setBoard(1, new Starfield(50, 0.6, 100))
@@ -148,15 +153,17 @@ PlayerShip.prototype.type = OBJECT_PLAYER;
  PlayerMissile.prototype.step = function(dt) {
 	 this.y += this.vy * dt;
 	 var collision = this.board.collide(this, OBJECT_ENEMY);
+	 	// Player hits an enemy ship
 	 if(collision) {
 		 collision.hit(this.damage);
 		 this.board.remove(this);
+		 // Player misses
 	 } else if(this.y <- this.h) {
 		 this.board.remove(this);
 	 }
  };
  
- // Enemy constructor
+// Enemy constructor
 var Enemy = function(blueprint, override) {
 	this.merge(this.baseParameters);
 	this.setup(blueprint.sprite, blueprint);
@@ -164,6 +171,7 @@ var Enemy = function(blueprint, override) {
 }
 Enemy.prototype = new Sprite();
 Enemy.prototype.type = OBJECT_ENEMY;
+ // For calculating enemy movement patterns
 Enemy.prototype.baseParameters = { A: 0, B: 0, C: 0, D: 0,
 						      E: 0, F: 0, G: 0, H: 0, t: 0 };
 Enemy.prototype.step = function(dt) {
@@ -205,8 +213,8 @@ var Explosion = function(centerX, centerY) {
 };
 
 Explosion.prototype = new Sprite();
-
 Explosion.prototype.step = function(dt) {
+	// 12 frames, each shown 3 times
 	this.frame = Math.floor(this.subFrame++ / 3);
 	if(this.subFrame >= 36) {
 		this.board.remove(this);
