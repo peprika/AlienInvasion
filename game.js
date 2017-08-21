@@ -179,5 +179,20 @@ Enemy.prototype.hit = function(damage) {
 	}
 }
 
-		   
+// Explosion
+var Explosion = function(centerX, centerY) {
+	this.setup('explosion', { frame: 0 });
+	this.x = centerX - this.w/2;
+	this.y = centerY - this.h/2;
+	this.subFrame = 0;
+};
+
+Explosion.prototype = new Sprite();
+
+Explosion.prototype.step = function(dt) {
+	this.frame = Math.floor(this.subFrame++ / 3);
+	if(this.subFrame >= 36) {
+		this.board.remove(this);
+	}
+};
  
