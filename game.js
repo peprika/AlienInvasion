@@ -169,6 +169,15 @@ Enemy.prototype.step = function(dt) {
 		   this.board.remove(this);
 	   }
 }
+Enemy.prototype.hit = function(damage) {
+	this.health -= damage;
+	if(this.health <= 0) {
+		if(this.board.remove(this)) {
+			this.board.add(new Explosion(this.x + this.w/2,
+									     this.y + this.h/2));
+		}
+	}
+}
 
 		   
  
