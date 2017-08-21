@@ -182,8 +182,8 @@ Enemy.prototype.step = function(dt) {
 	}
 	
 	if(this.y > Game.height ||
-	   this.x < -this.w ||
-	   this.x > Game.width) {
+	   this.x < -this.w * 2 ||
+	   this.x > Game.width * 2) {
 		   this.board.remove(this);
 	   }
 }
