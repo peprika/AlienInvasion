@@ -14,7 +14,7 @@ var sprites = {
 };
 
 var enemies = {
-	basic: { x: 100, y: -50, sprite: 'enemy_purple', B: 100, C: 2, E: 100 }
+	basic: { x: 100, y: -50, sprite: 'enemy_purple', B: 100, C: 2, E: 100, health: 20 }
 };
 
 var startGame = function() {
