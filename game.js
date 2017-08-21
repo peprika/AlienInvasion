@@ -176,6 +176,8 @@ Enemy.prototype.step = function(dt) {
 	var collision = this.board.collide(this, OBJECT_PLAYER);
 	if(collision) {
 		collision.hit(this.damage);
+		this.board.add(new Explosion(this.x + this.w/2, 
+									 this.y + this.h/2));
 		this.board.remove(this);
 	}
 	
