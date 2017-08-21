@@ -22,6 +22,18 @@ var enemies = {
 	step: { x: 0, y: -50, sprite: 'enemy_circle', health: 10, B: 300, C: 1.5, E: 60 }
 };
 
+var level1 = [
+	// Start	End		Gap		Type		Override
+	 [ 0,		4000,	500,	'step' 		  		   ],
+	 [ 6000,   13000,   800,    'ltr' 		  		   ],
+	 [ 12000,  16000,	400,	'circle' 	 		   ],
+	 [ 18200,  20000,	500,	'straight', { x: 150 } ],
+	 [ 18200,  20000,	500,	'straight', { x: 100 } ],	
+	 [ 18400,  20000,   500,    'straight', { x: 200 } ],
+	 [ 22000,  25000,   400,	'wiggle',   { x: 300 } ],
+	 [ 22000,  25000,	400,	'wiggle',   { x: 200 } ]
+];
+
 var startGame = function() {
 	Game.setBoard(0, new Starfield(20, 0.4, 100, true))
 	Game.setBoard(1, new Starfield(50, 0.6, 100))
