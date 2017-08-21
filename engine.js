@@ -116,28 +116,21 @@ var GameBoard = function() {
 		return obj;
 	};
 	
-	// Mark an object for removal
-	this.remove = function(obj) {
-		var wasStillAlive = this.removed.indexOf(obj) != -1;
-		if(wasStillAlive) { this.removed.push(obj); }
-		return wasStillAlive;
-	};
-	
-	// Reset the list of removed objects
-	this.resetRemoved = function() {this.removed = []; }
-	
-	// Remove objects marked for removal from th elist
-	this.finalizeRemoved = function() {
-		for(var i = 0, len = this.removed.length; i < len; i ++) {
-			// Check for removed objects
-			var idx = this.objects.indexOf(this.removed[i]);
-			if(idx != -1) {
-				this.cnt[this.removed[i].type]--;
-				// Cut the removed objects off the list
-				this.objects.splice(idx,1);
-			}
-		}
-	}
+  // Mark an object for removal
+  this.remove = function(obj) { 
+    this.removed.push(obj); 
+  };
+ 
+  // Reset the list of removed objects
+  this.resetRemoved = function() { this.removed = []; }
+ 
+  // Removed an objects marked for removal from the list
+  this.finalizeRemoved = function() {
+    for(var i=0,len=this.removed.length;i<len;i++) {
+      var idx = this.objects.indexOf(this.removed[i]);
+      if(idx != -1) this.objects.splice(idx,1);
+    }
+  }
 	
 	// Iteration: Call the same method on all current objects
 	this.iterate = function(funcName) {
@@ -200,4 +193,7 @@ Sprite.prototype.merge = function(props) {
 }
 Sprite.prototype.draw = function(ctx) {
 	SpriteSheet.draw(ctx, this.sprite, this.x, this.y, this.frame);
+}
+Sprite.prototype.hit = function(damage) {
+	this.board.remove(this);
 }

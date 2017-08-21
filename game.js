@@ -119,7 +119,7 @@ PlayerShip.prototype.type = OBJECT_PLAYER;
  
  // Player missile
  var PlayerMissile = function(x, y) {
-	 this.setup('missile', { vy: -700 });
+	 this.setup('missile', { vy: -700, damage: 10 });
 	 // Center the missile on x
 	 this.x = x - this.w/2;
 	 //Use the passed-in y as bottom of the missile
@@ -130,7 +130,13 @@ PlayerShip.prototype.type = OBJECT_PLAYER;
  
  PlayerMissile.prototype.step = function(dt) {
 	 this.y += this.vy * dt;
-	 if(this.y < -this.h) { this.board.remove(this); }
+	 var collision = this.board.collide(this, OBJECT_ENEMY);
+	 if(collision) {
+		 collision.hit(this.damage);
+		 this.board.remove(this);
+	 } else if(this.y <- this.h) {
+		 this.board.remove(this);
+	 }
  };
  
  // Enemy constructor
@@ -155,5 +161,6 @@ Enemy.prototype.step = function(dt) {
 		   this.board.remove(this);
 	   }
 }
+
 		   
  
