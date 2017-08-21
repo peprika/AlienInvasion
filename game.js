@@ -155,6 +155,13 @@ Enemy.prototype.step = function(dt) {
 	this.vy = this.E + this.F * Math.sin(this.G + this.t + this.H);
 	this.x += this.vx * dt;
 	this.y += this.vy * dt;
+	
+	var collision = this.board.collide(this, OBJECT_PLAYER);
+	if(collision) {
+		collision.hit(this.damage);
+		this.board.remove(this);
+	}
+	
 	if(this.y > Game.height ||
 	   this.x < -this.w ||
 	   this.x > Game.width) {
