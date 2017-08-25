@@ -20,9 +20,9 @@ var sprites = {
 var enemies = {
 	straight: { x: 0, y: -50, sprite: 'enemy_ship', health: 10, E: 100 },
 	ltr: { x: 0, y: -100, sprite: 'enemy_purple', health: 10, B: 200, C: 1, E: 200 },
-	circle: { x: 400, y: -50, sprite: 'enemy_circle', health: 10, A: 0, B: -200, C: 1, E: 20, F: 200, G:1, H: Math.PI/2 },
+	circle: { x: 400, y: -50, sprite: 'enemy_circle', health: 10, A: 0, B: -200, C: 1, E: 20, F: 20, G:1, H: Math.PI/2 },
 	wiggle: { x: 100, y: -50, sprite: 'enemy_bee', health: 20, B: 100, C: 4, E: 100 },
-	step: { x: 0, y: -50, sprite: 'enemy_circle', health: 10, B: 300, C: 1.5, E: 60 }
+	step: { x: 0, y: -50, sprite: 'enemy_circle', health: 10, B: 300, C: 1.5, E: 200 }
 };
 
 // Level data
@@ -58,13 +58,13 @@ var playGame = function() {
 }
 
 var winGame = function() {
-	Game.setBoard(3, newTitleScreen("You win!",
+	Game.setBoard(3, new TitleScreen("You win!",
 									"Press fire to play again",
 									 playGame));
 }
 
 var loseGame = function() {
-	Game.setBoard(3, newTitleScreen("You lose!",
+	Game.setBoard(3, new TitleScreen("You lose!",
 									"Press fire to play again",
 									 playGame));
 }
@@ -149,6 +149,11 @@ var loseGame = function() {
 }
 PlayerShip.prototype = new Sprite();
 PlayerShip.prototype.type = OBJECT_PLAYER;
+PlayerShip.prototype.hit = function(damage) {
+	if(this.board.remove(this)) {
+		loseGame();
+	}
+}
  
  // Player missile
  var PlayerMissile = function(x, y) {
